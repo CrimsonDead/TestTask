@@ -4,12 +4,14 @@ const App = () => {
 
     const onButtonClick = (event) => {
         event.stopPropagation();
-        populateUser(inputState);
+        populateUser(inputUnpState);
     }
 
     const [state, setState] = useState({ unps: [], loading: true });
 
-    const [inputState, setInputState] = useState('');
+    const [inputUnpState, setInputUnpState] = useState('');
+
+    const [inputEmailState, setInputEmailState] = useState('');
 
     const [isSeven, setIsSeven] = useState(false);
 
@@ -19,10 +21,10 @@ const App = () => {
         currentTime === 16 ? setIsSeven(true) : setIsSeven(false);
     }, [])
 
-    const onInputChange = (event) => {
+    const onInputUnpChange = (event) => {
         event.stopPropagation();
         const { target: { value } } = event;
-        setInputState(value);
+        setInputUnpState(value);
     }
 
     async function populateUser(inputState) {
@@ -34,6 +36,12 @@ const App = () => {
         console.log(state.unps.value);
     }
 
+    const onInputEmailChange = (event) => {
+        event.stopPropagation();
+        const { target: { value } } = event;
+        setInputEmailState(value);
+    }
+
     return (
         <table className='table table-striped' aria-labelledby="tabelLabel" style={{
             border: '4px double #333', 
@@ -43,13 +51,15 @@ const App = () => {
             <thead>
                 <tr>
                     <th>User unique number</th>
+                    <th>User Email</th>
                     <th>Exist in local data base</th>
                     <th>Exsist in external data base</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><input onChange={(event) => onInputChange(event)} type="text" name="UNP" placeholder="User UNP" /></td>
+                    <td><input onChange={(event) => onInputUnpChange(event)} type="text" name="UNP" placeholder="User UNP" /></td>
+                    <td><input onChange={(event) => onInputEmailChange(event)} type="text" name="Email" placeholder="User Email" /></td>
                     <td><input type="checkbox" checked={state.unps.isLocalUserExist} /></td>
                     <td><input type="checkbox" checked={!state.unps.isExternalUserExist} /></td>
                 </tr>

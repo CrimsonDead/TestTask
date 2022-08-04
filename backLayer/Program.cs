@@ -1,3 +1,4 @@
+using backLayer;
 using dataLayer.Context;
 using dataLayer.Models;
 using dataLayer.Repositories;
@@ -20,6 +21,7 @@ builder.Services.AddDbContext<ApplicationContext>(options =>
 });
 
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
+builder.Services.AddHostedService<EmailService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
